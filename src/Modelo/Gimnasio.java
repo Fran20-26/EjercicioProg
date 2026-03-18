@@ -51,10 +51,9 @@ public class Gimnasio {
     
     public boolean comprobarDNI(String DNI, String nombre, String tipoSusc) {
         boolean Existe = false;
-        if (Clientes.containsKey(DNI)) {
+        if (Clientes.containsKey(DNI) == true) {
             Existe = true;
-        } else {
-            anadirCliente(DNI, nombre, tipoSusc);
+        
         }
           return Existe;
     }

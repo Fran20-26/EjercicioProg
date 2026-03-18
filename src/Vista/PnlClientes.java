@@ -123,8 +123,10 @@ public class PnlClientes extends javax.swing.JPanel {
         gym.comprobarDNI(DNI, nombre, TipoSusc);
         if (gym.comprobarDNI(DNI, nombre, TipoSusc) == true) {
             JOptionPane.showMessageDialog(this, "DNI duplicado", "Error", JOptionPane.ERROR_MESSAGE);
-        } else
+        } else {
+            gym.anadirCliente(DNI, nombre, TipoSusc);
         JOptionPane.showMessageDialog(this, "Cliente añadido", "Añadido", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
