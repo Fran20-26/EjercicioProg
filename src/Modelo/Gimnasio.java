@@ -41,7 +41,12 @@ public class Gimnasio {
         return tipo;
     }
     
-    public void anadirRutina(String codRutina, String nombre, int nivel, String Desc) {
+    public int ComprobarRutina(String codRutina) {
+        int i = Rutinas.indexOf(codRutina);
+        return i;
+    }
+    
+    public void anadirRutina(String codRutina, String nombre, int nivel, String Desc) { 
         Rutinas.add(new Ejercicio(codRutina, nombre, nivel, Desc));
     }
     
@@ -49,12 +54,24 @@ public class Gimnasio {
         Clientes.put(DNI, new Cliente(DNI, nombre, tipoSusc));
     }
     
-    public boolean comprobarDNI(String DNI, String nombre, String tipoSusc) {
+    public boolean comprobarDNI(String DNI) {
         boolean Existe = false;
         if (Clientes.containsKey(DNI) == true) {
             Existe = true;
-        
         }
           return Existe;
     }
+    
+    public boolean comprobarClientes() {
+        boolean existe = false;
+        if (Clientes != null) {
+            existe = true;
+        }
+            return existe;
+    }
+
+    public Cliente getClientes(String DNI) {
+        return Clientes.get(DNI);
+    }
+    
 }

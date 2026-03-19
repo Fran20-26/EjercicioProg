@@ -2,20 +2,20 @@
 package Modelo;
 
 public class Ejercicio {
-    private String CodEj;
+    private String codRutina;
     private String Nombre;
     private int Nivel;
     private String Descripcion;
 
     public Ejercicio(String CodEj, String Nombre, int Nivel, String Descripcion) {
-        this.CodEj = CodEj;
+        this.codRutina = CodEj;
         this.Nombre = Nombre;
         this.Nivel = Nivel;
         this.Descripcion = Descripcion;
     }
 
-    public String getCodEj() {
-        return CodEj;
+    public String getCodRutina() {
+        return codRutina;
     }
 
     public String getNombre() {

@@ -3,7 +3,6 @@ package Vista;
 
 import Modelo.Empleado;
 import Modelo.Gimnasio;
-import java.util.HashMap;
 
 /**
  *
@@ -12,24 +11,25 @@ import java.util.HashMap;
 public class VtnMenu extends javax.swing.JFrame {
     VtnAcceso vtnAcceso;
     PnlClientes pnlClientes;
-    Empleado e;
-    Gimnasio gym;
+    Gimnasio miGym;
     PnlEjercicio Ejercicio;
+    PnlAsignar pnlAsignar;
     /**
      * Creates new form VtnMenu
      * @param login
+     * @param gym
      */
-    public VtnMenu(String login) {
-        pnlClientes = new PnlClientes();
-        gym = new Gimnasio();
-        vtnAcceso = new VtnAcceso();
-        Ejercicio = new PnlEjercicio();
+    public VtnMenu(String login, Gimnasio gym) {
+        miGym = gym;
+        pnlAsignar = new PnlAsignar(miGym);
+        pnlClientes = new PnlClientes(miGym);
+        vtnAcceso = new VtnAcceso(miGym);
+        Ejercicio = new PnlEjercicio(miGym);
         initComponents();
     }
     public void comprobarTipo() {
-        if (e.getTipo()== 2) {
-            Ejercicio.setVisible(false);
-        }
+        
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,6 +72,11 @@ public class VtnMenu extends javax.swing.JFrame {
         mnuOpciones.add(MnuAlta);
 
         MnuAsignacion.setText("Asignar Actividad");
+        MnuAsignacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnuAsignacionActionPerformed(evt);
+            }
+        });
         mnuOpciones.add(MnuAsignacion);
 
         MnuCheckin.setText("Check-In");
@@ -106,7 +111,7 @@ public class VtnMenu extends javax.swing.JFrame {
 
     private void MnuAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnuAltaActionPerformed
         quitarPaneles();
-        pnlClientes = new PnlClientes();
+        pnlClientes = new PnlClientes(miGym);
         pnlClientes.setVisible(true);
         getContentPane().add(pnlClientes);
         pack();
@@ -118,7 +123,8 @@ public class VtnMenu extends javax.swing.JFrame {
 
     private void MnuCerrarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnuCerrarSActionPerformed
         quitarPaneles();
-        vtnAcceso = new VtnAcceso(gym);
+        dispose();
+        vtnAcceso = new VtnAcceso(miGym);
         vtnAcceso.setVisible(true);
         pack();
     }//GEN-LAST:event_MnuCerrarSActionPerformed
@@ -130,10 +136,19 @@ public class VtnMenu extends javax.swing.JFrame {
         pack();
     }//GEN-LAST:event_MnuEjercicioActionPerformed
 
+    private void MnuAsignacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnuAsignacionActionPerformed
+        quitarPaneles();
+        pnlAsignar = new PnlAsignar(miGym);
+        pnlAsignar.setVisible(true);
+        getContentPane().add(pnlAsignar);
+        pack();
+    }//GEN-LAST:event_MnuAsignacionActionPerformed
+
     public void quitarPaneles() {
         Ejercicio.setVisible(false);
         vtnAcceso.setVisible(false);
         pnlClientes.setVisible(false);
+        pnlAsignar.setVisible(false);
     }
     
 

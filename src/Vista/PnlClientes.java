@@ -5,15 +5,16 @@ import Modelo.Gimnasio;
 import javax.swing.JOptionPane;
 
 public class PnlClientes extends javax.swing.JPanel {
-    Gimnasio gym;
+    Gimnasio miGym;
     /**
      * Creates new form PnlClientes
+     * @param gym
      */
-    public PnlClientes() {
-        gym = new Gimnasio();
+    public PnlClientes(Gimnasio gym) {
+        miGym = gym;
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -120,11 +121,11 @@ public class PnlClientes extends javax.swing.JPanel {
         if (DNI.equals("") || nombre.equals("") || TipoSusc.equals("")) {
             JOptionPane.showMessageDialog(this, "Campos incompletos", "Error",JOptionPane.ERROR_MESSAGE);
         }
-        gym.comprobarDNI(DNI, nombre, TipoSusc);
-        if (gym.comprobarDNI(DNI, nombre, TipoSusc) == true) {
+        miGym.comprobarDNI(DNI);
+        if (miGym.comprobarDNI(DNI) == true) {
             JOptionPane.showMessageDialog(this, "DNI duplicado", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            gym.anadirCliente(DNI, nombre, TipoSusc);
+            miGym.anadirCliente(DNI, nombre, TipoSusc);
         JOptionPane.showMessageDialog(this, "Cliente añadido", "Añadido", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

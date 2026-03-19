@@ -5,13 +5,15 @@ import encriptar.Generador;
 import javax.swing.JOptionPane;
 
 public class VtnAcceso extends javax.swing.JFrame {
-    Gimnasio gym;
+    Gimnasio miGym;
     
     public VtnAcceso() {
-        gym = new Gimnasio();
+        miGym = new Gimnasio();
         initComponents();
     }
+    
     public VtnAcceso(Gimnasio gym) {
+        this.miGym = gym;
         initComponents();
     }
 
@@ -106,9 +108,9 @@ public class VtnAcceso extends javax.swing.JFrame {
     private void BtnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnValidarActionPerformed
     String login = TxtLogin.getText();
     String contra = Generador.getMD5(new String(PwdContra.getPassword()));
-    gym.cargarEmpleados();
-    gym.comprobarLogin(login, contra);
-    if (gym.comprobarLogin(login, contra)) {
+    miGym.cargarEmpleados();
+    miGym.comprobarLogin(login, contra);
+    if (miGym.comprobarLogin(login, contra)) {
         cargarMenu(login);
         dispose();
     } else
@@ -116,7 +118,7 @@ public class VtnAcceso extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnValidarActionPerformed
 
     public void cargarMenu(String login) {
-        VtnMenu vtnMenu = new VtnMenu(login);
+        VtnMenu vtnMenu = new VtnMenu(login, miGym);
         vtnMenu.setVisible(true);
         pack();
     }

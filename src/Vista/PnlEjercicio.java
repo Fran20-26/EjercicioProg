@@ -1,4 +1,3 @@
-
 package Vista;
 
 import Modelo.Empleado;
@@ -11,13 +10,14 @@ import javax.swing.JOptionPane;
  * @author dam
  */
 public class PnlEjercicio extends javax.swing.JPanel {
-    Gimnasio gym;
+
+    Gimnasio miGym;
 
     /**
      * Creates new form PnlEjercicio
      */
-    public PnlEjercicio() {
-        gym = new Gimnasio();
+    public PnlEjercicio(Gimnasio gym) {
+        miGym = gym;
         initComponents();
     }
 
@@ -155,16 +155,13 @@ public class PnlEjercicio extends javax.swing.JPanel {
 
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
         int tipo = RbPrincipiante.isSelected() ? 1 : 0;
-        String codRutina = txtCodRut.getText();
         String nombre = txtNombre.getText();
         String Desc = TaDescripcion.getText();
-        if (codRutina.equals("") || nombre.equals("")) {
-            JOptionPane.showMessageDialog(this, "Campos incompletos", "error", JOptionPane.ERROR_MESSAGE);
-            txtCodRut.requestFocus();
-        } else {
-            gym.anadirRutina(codRutina, nombre, tipo, Desc);
-            JOptionPane.showMessageDialog(this, "Ejercicio Añadido", "Info", JOptionPane.INFORMATION_MESSAGE);
-        }
+        String codRutina = txtCodRut.getText();
+        
+        comprobarCampos(codRutina, nombre);
+        comprobarDisponibilidad(codRutina, nombre, tipo, Desc);
+
     }//GEN-LAST:event_BtnAceptarActionPerformed
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
@@ -175,6 +172,24 @@ public class PnlEjercicio extends javax.swing.JPanel {
         RbPro.setSelected(false);
     }//GEN-LAST:event_BtnCancelarActionPerformed
 
+    public void comprobarCampos(String codRutina, String nombre) {
+        if (codRutina.equals("") || nombre.equals("") || codRutina.equals("") && nombre.equals("")) {
+            JOptionPane.showMessageDialog(this, "Campos incompletos", "error", JOptionPane.ERROR_MESSAGE);
+            txtCodRut.requestFocus();
+        }
+    }
+    
+    public void comprobarDisponibilidad(String codRutina, String nombre, int tipo, String Desc) {
+        int i = miGym.ComprobarRutina(codRutina); 
+        if (i != -1) {
+            JOptionPane.showMessageDialog(this, "Ejercicio duplicado", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (i == -1) {
+            miGym.anadirRutina(codRutina, nombre, tipo, Desc);
+            JOptionPane.showMessageDialog(this, "Ejercicio Añadido", "Info", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAceptar;
