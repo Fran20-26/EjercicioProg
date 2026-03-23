@@ -157,7 +157,15 @@ public class PnlEjercicio extends javax.swing.JPanel {
         int tipo = RbPrincipiante.isSelected() ? 1 : 0;
         String nombre = txtNombre.getText();
         String Desc = TaDescripcion.getText();
-        String codRutina = txtCodRut.getText();
+        int codRutina;
+        
+        try {
+            codRutina = Integer.parseInt(txtCodRut.getText());
+        }
+        catch (NumberFormatException ex) {
+            codRutina = 0;
+        }
+        
         
         comprobarCampos(codRutina, nombre);
         comprobarDisponibilidad(codRutina, nombre, tipo, Desc);
@@ -172,15 +180,15 @@ public class PnlEjercicio extends javax.swing.JPanel {
         RbPro.setSelected(false);
     }//GEN-LAST:event_BtnCancelarActionPerformed
 
-    public void comprobarCampos(String codRutina, String nombre) {
-        if (codRutina.equals("") || nombre.equals("") || codRutina.equals("") && nombre.equals("")) {
+    public void comprobarCampos(int codRutina, String nombre) {
+        if (nombre.equals("")) {
             JOptionPane.showMessageDialog(this, "Campos incompletos", "error", JOptionPane.ERROR_MESSAGE);
             txtCodRut.requestFocus();
         }
     }
     
-    public void comprobarDisponibilidad(String codRutina, String nombre, int tipo, String Desc) {
-        int i = miGym.ComprobarRutina(codRutina); 
+    public void comprobarDisponibilidad(int codRutina, String nombre, int tipo, String Desc) {
+        /*int i = miGym.ComprobarRutina(codRutina); 
         if (i != -1) {
             JOptionPane.showMessageDialog(this, "Ejercicio duplicado", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -188,6 +196,14 @@ public class PnlEjercicio extends javax.swing.JPanel {
             miGym.anadirRutina(codRutina, nombre, tipo, Desc);
             JOptionPane.showMessageDialog(this, "Ejercicio Añadido", "Info", JOptionPane.INFORMATION_MESSAGE);
             }
+        } */
+        
+        Integer i = miGym.ComprobarRutina(codRutina);
+        if (i != -1) { // si devuelve un valor distinto de -1 es que ha encontrado el valor
+            JOptionPane.showMessageDialog(this, "Código de rutina existente", "error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            miGym.anadirRutina(codRutina, nombre, tipo, Desc);
+            JOptionPane.showMessageDialog(this, "Añadido");
         }
     }
 

@@ -10,8 +10,10 @@ public class Gimnasio {
     private HashMap<String, Cliente> Clientes;
     private ArrayList<Ejercicio> Rutinas;
     private HashMap<String, Empleado> Empleados;
+    private HashMap<String, Entrenamiento> Entrenamientos;
     
     public Gimnasio() {
+        Entrenamientos = new HashMap<>();
         Clientes = new HashMap<>();
         Empleados= new HashMap<>();
         Rutinas = new ArrayList<>();
@@ -41,12 +43,13 @@ public class Gimnasio {
         return tipo;
     }
     
-    public int ComprobarRutina(String codRutina) {
-        int i = Rutinas.indexOf(codRutina);
+    public int ComprobarRutina(int codRutina) {
+        int i = Rutinas.indexOf(new Ejercicio(codRutina)); // al utilizar un indexOf debe recibir un objeto, sin un objeto el número nunca existe
+        
         return i;
     }
     
-    public void anadirRutina(String codRutina, String nombre, int nivel, String Desc) { 
+    public void anadirRutina(int codRutina, String nombre, int nivel, String Desc) { 
         Rutinas.add(new Ejercicio(codRutina, nombre, nivel, Desc));
     }
     
@@ -73,5 +76,10 @@ public class Gimnasio {
     public Cliente getClientes(String DNI) {
         return Clientes.get(DNI);
     }
-    
+
+    public ArrayList<Ejercicio> getRutinas() {
+        return Rutinas;
+    }
 }
+    // envoltorios (Integer, Float) permiten el uso de metodos o conversiones de formato (como Integer.parseInt)
+    // se utiliza para tratar datos primitivos como float o int 
