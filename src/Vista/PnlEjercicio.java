@@ -169,15 +169,11 @@ public class PnlEjercicio extends javax.swing.JPanel {
         
         comprobarCampos(codRutina, nombre);
         comprobarDisponibilidad(codRutina, nombre, tipo, Desc);
-
+        borrarCampos();
     }//GEN-LAST:event_BtnAceptarActionPerformed
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
-        txtCodRut.setText("");
-        txtNombre.setText("");
-        TaDescripcion.setText("");
-        RbPrincipiante.setSelected(false);
-        RbPro.setSelected(false);
+        borrarCampos();
     }//GEN-LAST:event_BtnCancelarActionPerformed
 
     public void comprobarCampos(int codRutina, String nombre) {
@@ -205,6 +201,13 @@ public class PnlEjercicio extends javax.swing.JPanel {
             miGym.anadirRutina(codRutina, nombre, tipo, Desc);
             JOptionPane.showMessageDialog(this, "Añadido");
         }
+    }
+    public void borrarCampos() {
+        txtCodRut.setText("");
+        txtNombre.setText("");
+        TaDescripcion.setText("");
+        RbPrincipiante.setSelected(false);
+        RbPro.setSelected(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

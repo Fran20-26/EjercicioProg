@@ -1,4 +1,3 @@
-
 package Vista;
 
 import Modelo.Gimnasio;
@@ -6,12 +5,14 @@ import java.awt.event.KeyEvent;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
-
 public class PnlAsignar extends javax.swing.JPanel {
+
     Gimnasio miGym;
     DefaultComboBoxModel modelo;
+
     /**
      * Creates new form PnlAsignar
+     *
      * @param gym
      */
     public PnlAsignar(Gimnasio gym) {
@@ -19,21 +20,28 @@ public class PnlAsignar extends javax.swing.JPanel {
         initComponents();
         modelo = new DefaultComboBoxModel();
         modelo.addElement("-Selecciona una Rutina-");
-        
-        modelo.addAll(miGym.getRutinas());
+
+        // anadir el nombre de las rutinas creadas al ComboBox
+        for (int i = 0; i < miGym.getRutinas().size(); i++) {
+            modelo.addElement(miGym.getNomRutinas(i));
+        }
+
         cmbRutinas.setModel(modelo);
         cmbRutinas.setSelectedIndex(0);
-        
+
     }
+
+    // Prueba para comprobar que los clientes se guardan
     public void comprobarCliente() {
         String DNI = txtDNI.getText();
         boolean comprobado = miGym.comprobarDNI(DNI);
         if (comprobado == false) {
             nomCliente.setText("********");
         } else {
-            nomCliente.setText(miGym.getClientes(DNI).getNombre()); 
+            nomCliente.setText(miGym.getClientes(DNI).getNombre());
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -115,38 +123,35 @@ public class PnlAsignar extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtSeries, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel5)
-                                .addGap(52, 52, 52)
-                                .addComponent(txtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtDNI)
-                                    .addComponent(cmbRutinas, 0, 98, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(33, 33, 33)
-                                        .addComponent(nomCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addGap(10, 10, 10)
-                                        .addComponent(txtReps, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(29, 29, 29))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(197, 197, 197))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDNI, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                            .addComponent(cmbRutinas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(33, 33, 33)
+                                .addComponent(nomCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(10, 10, 10)
+                                .addComponent(txtReps, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                            .addComponent(txtSeries))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addGap(52, 52, 52)
+                        .addComponent(txtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,16 +209,20 @@ public class PnlAsignar extends javax.swing.JPanel {
         int Repeticiones = comprobarNumero(txtReps.getText());
         int Series = comprobarNumero(txtSeries.getText());
         int Peso = comprobarNumero(txtPeso.getText());
-        
+        miGym.comprobarEntrenamiento(Fecha, DNI);
+        if (miGym.comprobarEntrenamiento(Fecha, DNI) == true ) {
+            if (miGym.comprobarEntrenamiento(DNI, Fecha) == false) {
+                miGym.anadirEntrenamiento(Fecha, DNI, Repeticiones, Series, Peso);
+            }
+        }
     }//GEN-LAST:event_BtnAñadirActionPerformed
 
     public int comprobarNumero(String texto) {
         int valor;
         try {
             valor = Integer.parseInt(texto);
-        } 
-        catch (NumberFormatException ex) {
-           valor = 0;
+        } catch (NumberFormatException ex) {
+            valor = 0;
         }
         return valor;
     }

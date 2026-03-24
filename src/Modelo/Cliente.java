@@ -32,6 +32,9 @@ public class Cliente {
         return entrenamientos;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Cliente{" + "nombre=" + nombre + '}';
+    }
     
 }

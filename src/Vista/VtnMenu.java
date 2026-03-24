@@ -1,4 +1,3 @@
-
 package Vista;
 
 import Modelo.Empleado;
@@ -9,28 +8,43 @@ import Modelo.Gimnasio;
  * @author dam
  */
 public class VtnMenu extends javax.swing.JFrame {
+
     VtnAcceso vtnAcceso;
     PnlClientes pnlClientes;
     Gimnasio miGym;
     PnlEjercicio Ejercicio;
     PnlAsignar pnlAsignar;
+    PnlCheckIn pnlCheckIn;
+
     /**
      * Creates new form VtnMenu
+     *
      * @param login
      * @param gym
      */
     public VtnMenu(String login, Gimnasio gym) {
         miGym = gym;
+        pnlCheckIn = new PnlCheckIn(miGym);
         pnlAsignar = new PnlAsignar(miGym);
         pnlClientes = new PnlClientes(miGym);
         vtnAcceso = new VtnAcceso(miGym);
         Ejercicio = new PnlEjercicio(miGym);
         initComponents();
+        Empleado datos = miGym.buscarTipo(login);
+        if (datos != null) {
+            switch (datos.getTipo()) {
+                case 1 -> {
+                    MnuAlta.setVisible(false);
+                    MnuCheckin.setVisible(false);
+                }
+                case 2 -> {
+                    MnuEjercicio.setVisible(false);
+                    MnuAsignacion.setVisible(false);
+                }
+            }
+        }
     }
-    public void comprobarTipo() {
-        
-        
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,7 +69,7 @@ public class VtnMenu extends javax.swing.JFrame {
 
         mnuOpciones.setText("Opciones");
 
-        MnuEjercicio.setText("Alta Ejercicio");
+        MnuEjercicio.setText("Catálogo");
         MnuEjercicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnuEjercicioActionPerformed(evt);
@@ -80,6 +94,11 @@ public class VtnMenu extends javax.swing.JFrame {
         mnuOpciones.add(MnuAsignacion);
 
         MnuCheckin.setText("Check-In");
+        MnuCheckin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnuCheckinActionPerformed(evt);
+            }
+        });
         mnuOpciones.add(MnuCheckin);
 
         jMenuBar1.add(mnuOpciones);
@@ -144,13 +163,22 @@ public class VtnMenu extends javax.swing.JFrame {
         pack();
     }//GEN-LAST:event_MnuAsignacionActionPerformed
 
+    private void MnuCheckinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnuCheckinActionPerformed
+        quitarPaneles();
+        pnlCheckIn = new PnlCheckIn(miGym);
+        pnlCheckIn.setVisible(true);
+        getContentPane().add(pnlCheckIn);
+        pack();
+    }//GEN-LAST:event_MnuCheckinActionPerformed
+
     public void quitarPaneles() {
         Ejercicio.setVisible(false);
         vtnAcceso.setVisible(false);
         pnlClientes.setVisible(false);
         pnlAsignar.setVisible(false);
+        pnlCheckIn.setVisible(false);
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem MnuAlta;

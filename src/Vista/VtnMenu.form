@@ -11,7 +11,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="MnuEjercicio">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Alta Ejercicio"/>
+                <Property name="text" type="java.lang.String" value="Cat&#xe1;logo"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnuEjercicioActionPerformed"/>
@@ -37,6 +37,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Check-In"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnuCheckinActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
